@@ -1,0 +1,26 @@
+{
+  "name": "2_mern_blog",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/PardeepDeveloperIIOT/mern-blog#readme",
+  "bugs": {
+    "url": "https://github.com/PardeepDeveloperIIOT/mern-blog/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PardeepDeveloperIIOT/mern-blog.git"
+  },
+  "license": "ISC",
+  "author": "pardeep",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon backend/server.js",
+    "start": "node backend/server.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1",
+    "nodemon": "^3.1.11",
+    "nodmeon": "^0.0.1-security"
+  }
+}

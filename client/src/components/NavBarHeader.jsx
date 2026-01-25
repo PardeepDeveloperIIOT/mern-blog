@@ -18,10 +18,10 @@ const NavBarHeader = () => {
               Stack
             </h1>
           </div>
-          <div className="flex gap-2 items-center">
-            <Link>Home</Link>
-            <Link>About</Link>
-            <Link>Project</Link>
+          <div className="flex gap-4 items-center">
+            <Link to={"/"}>Home</Link>
+            <Link to={"/about"}>About</Link>
+            <Link to={"/projects"}>Project</Link>
           </div>
           <div className="flex gap-2 items-center">
             <form>
@@ -34,7 +34,7 @@ const NavBarHeader = () => {
                 <AiOutlineSearch className=" btn text-3xl absolute -top-0.5 right-0  text-gray-400 px-1"></AiOutlineSearch>
               </div>
             </form>
-            <button className="lg:hidden btn px-3 py-2 border border-gray-500 rounded-lg">
+            <button className="lg:hidden btn px-4 py-3 border border-gray-500 rounded-lg">
               <AiOutlineSearch></AiOutlineSearch>
             </button>
             <button className="px-3 py-2 border-2 border-blue-400 rounded-xl hover:bg-gradient-to-r from-blue-400 to-pink-400 transition-500 ease-in-out">
