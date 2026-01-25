@@ -1,15 +1,17 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Dashboard from "./pages/Dashboard";
 import Projects from "./pages/Projects";
+import NavBarHeader from "./components/NavBarHeader";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <div className="w-full lg:max-w-screen-2xl mx-auto">
+      <NavBarHeader></NavBarHeader>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/about" element={<About></About>}></Route>
@@ -18,7 +20,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard></Dashboard>}></Route>
         <Route path="/projects" element={<Projects></Projects>}></Route>
       </Routes>
-    </BrowserRouter>
+    </div>
   );
 };
 
