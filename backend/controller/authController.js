@@ -1,6 +1,7 @@
 import HandleError from "../utils/handleError.js";
 import User from "../models/userModel.js";
 import handleAsyncError from "../middleware/handleAsyncError.js";
+import { jwtToken } from "../utils/jwtToken.js";
 
 // Sign Up
 export const signUp = handleAsyncError(async (req, res, next) => {
@@ -12,8 +13,6 @@ export const signUp = handleAsyncError(async (req, res, next) => {
 
   const user = await User.create(req.body);
 
-  res.json({
-    status: "success",
-    user,
-  });
+  // JWT Token and cookies
+  jwtToken(user, 200, res);
 });
