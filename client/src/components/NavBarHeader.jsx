@@ -1,7 +1,5 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
-import { FaMoon } from "react-icons/fa";
 
 // bg-gray-800
 
@@ -12,9 +10,11 @@ const NavBarHeader = () => {
         <div className="navbar-component-1 flex gap-4 justify-between ">
           <div className="flex items-center">
             <h1 className="text-2xl font-bold">
-              <span className="rounded-lg px-2 py-2 bg-gradient-to-r from-blue-400  to-purple-400">
-                MERN
-              </span>
+              <Link to={"/"}>
+                <span className="rounded-lg px-2 py-2 bg-gradient-to-r from-blue-400  to-purple-400">
+                  MERN
+                </span>
+              </Link>
               Stack
             </h1>
           </div>
