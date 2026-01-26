@@ -13,6 +13,5 @@ export const jwtToken = (user, statusCode, res) => {
   return res.status(statusCode).json({
     status: "success",
     user,
-    token,
   });
 };

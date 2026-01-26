@@ -1,8 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ButtonAccount from "../components/ButtonAccount";
 
 const SignUp = () => {
+  const [formData, setFormData] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData((data) => ({ ...data, [e.target.name]: e.target.value }));
+  };
+
+  const HandleSignupFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch("/api/v1/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const data = await res.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <div className="max-w-screen-lg min-h-screen mt-36 mx-auto">
@@ -22,13 +46,19 @@ const SignUp = () => {
           </div>
           {/* right side */}
           <div className="flex-1 right-side-conatiner ">
-            <form className="flex flex-col gap-4">
+            <form
+              onSubmit={HandleSignupFormSubmit}
+              className="flex flex-col gap-4"
+            >
               <div className="flex flex-col ">
                 <label htmlFor="username" className="font-medium">
                   Your Username
                 </label>
                 <input
+                  onChange={handleChange}
                   type="text"
+                  name="username"
+                  value={formData.username}
                   placeholder="Username"
                   id="username"
                   className="border border-gray-300 rounded-lg p-2"
@@ -39,7 +69,10 @@ const SignUp = () => {
                   Your Email
                 </label>
                 <input
+                  onChange={handleChange}
                   type="text"
+                  name="email"
+                  value={formData.email}
                   placeholder="name@complany.com"
                   id="email"
                   className="border border-gray-300 rounded-lg p-2"
@@ -50,7 +83,10 @@ const SignUp = () => {
                   Your Pasword
                 </label>
                 <input
+                  onChange={handleChange}
                   type="text"
+                  name="password"
+                  value={formData.password}
                   placeholder="Password"
                   id="password"
                   className="border border-gray-300 rounded-lg p-2"
