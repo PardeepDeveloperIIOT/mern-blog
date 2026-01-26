@@ -18,7 +18,7 @@ const server = app.listen(process.env.PORT, () => {
 
 // ⭕ promiss error handle (catch)
 process.on("unhandledRejection", (err) => {
-  console.log("UNHANDLED PROMISE REJECTION 💥 Shutting down...", err.message);
+  console.log("UNHANDLED PROMISE REJECTION 💥 Shutting down...", err.code);
   server.close(() => {
     process.exit(1);
   });
