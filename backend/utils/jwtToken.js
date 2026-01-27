@@ -11,7 +11,8 @@ export const jwtToken = (user, statusCode, res) => {
   res.cookie("token", token, option);
 
   return res.status(statusCode).json({
-    status: "success",
+    success: true,
     user,
+    token,
   });
 };

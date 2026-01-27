@@ -1,32 +1,48 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import ButtonAccount from "../components/ButtonAccount";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  register,
+  removeError,
+  removeSuccess,
+} from "../features/user/userSlice";
 
 const SignUp = () => {
-  const [formData, setFormData] = useState({
+  const dispatch = useDispatch();
+  const { error, success, loading } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
+  const [userData, setUserData] = useState({
     username: "",
     email: "",
     password: "",
   });
 
   const handleChange = (e) => {
-    setFormData((data) => ({ ...data, [e.target.name]: e.target.value }));
+    setUserData((data) => ({ ...data, [e.target.name]: e.target.value }));
   };
 
   const HandleSignupFormSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const res = await fetch("/api/v1/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      const data = await res.json();
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(register(userData));
   };
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+      dispatch(removeError());
+    }
+  }, [dispatch, error]);
+
+  useEffect(() => {
+    if (success) {
+      toast.success("Registration Successful");
+      dispatch(removeSuccess());
+      navigate("/");
+    }
+  }, [dispatch, success]);
   return (
     <>
       <div className="max-w-screen-lg min-h-screen mt-36 mx-auto">
@@ -58,7 +74,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   type="text"
                   name="username"
-                  value={formData.username}
+                  value={userData.username}
                   placeholder="Username"
                   id="username"
                   className="border border-gray-300 rounded-lg p-2"
@@ -72,7 +88,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   type="text"
                   name="email"
-                  value={formData.email}
+                  value={userData.email}
                   placeholder="name@complany.com"
                   id="email"
                   className="border border-gray-300 rounded-lg p-2"
@@ -86,20 +102,22 @@ const SignUp = () => {
                   onChange={handleChange}
                   type="text"
                   name="password"
-                  value={formData.password}
+                  value={userData.password}
                   placeholder="Password"
                   id="password"
                   className="border border-gray-300 rounded-lg p-2"
                 />
               </div>
               <div className="text-center">
-                <ButtonAccount title="SignUp"></ButtonAccount>
+                <ButtonAccount
+                  title={loading ? "SignUp..." : "SignUp"}
+                ></ButtonAccount>
               </div>
             </form>
             <div className="flex gap-2  mt-5">
               <span className="font-medium">Have an Account?</span>
               <Link to={"/sign-in"} className="text-blue-600 font-bold">
-                Sign In
+                "SignIn"
               </Link>
             </div>
           </div>
