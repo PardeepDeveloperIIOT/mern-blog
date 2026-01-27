@@ -16,3 +16,23 @@ export const signUp = handleAsyncError(async (req, res, next) => {
   // JWT Token and cookies
   jwtToken(user, 200, res);
 });
+
+// SignIn User
+export const signIn = handleAsyncError(async (req, res, next) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
+    return next(new HandleError(400, "Email or Password can not be empty"));
+  }
+  const user = await User.findOne({ email }).select("+password");
+  if (!user) {
+    return next(new HandleError(404, "Invalid Email or Password"));
+  }
+
+  // check passowrd
+  if (!(await user.checkPassword(password))) {
+    return next(new HandleError(404, "Password is incorrect"));
+  }
+
+  //Tokern and cookies
+  jwtToken(user, 200, res);
+});
