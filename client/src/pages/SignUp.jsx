@@ -40,7 +40,7 @@ const SignUp = () => {
     if (success) {
       toast.success("Registration Successful");
       dispatch(removeSuccess());
-      navigate("/");
+      navigate("/sign-in");
     }
   }, [dispatch, success]);
   return (

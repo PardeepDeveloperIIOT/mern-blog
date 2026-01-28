@@ -16,7 +16,27 @@ export const register = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(
-        error.response?.data || "REgistration fail please try again",
+        error.response?.data || "Registration fail please try again",
+      );
+    }
+  },
+);
+//----------------SignIn api call
+export const login = createAsyncThunk(
+  "user/login",
+  async (userData, { rejectWithValue }) => {
+    try {
+      const config = {
+        "Content-Type": "application/json",
+      };
+      const { data } = await axios.post("/api/v1/signin", userData, config, {
+        withCredentials: true,
+      });
+      console.log("Login Data:-", data);
+      return data;
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data || "Login fail please try again",
       );
     }
   },
@@ -56,6 +76,26 @@ const userSlice = createSlice({
       .addCase(register.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload?.message || "Signup Error";
+        state.user = null;
+        state.isAuthenticated = false;
+      });
+    builder
+      .addCase(login.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(login.fulfilled, (state, action) => {
+        state.loading = false;
+        state.error = null;
+        state.user = action.payload?.user || null;
+        state.success = action.payload.success;
+        state.isAuthenticated = Boolean(action.payload?.user);
+      })
+      .addCase(login.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload?.message || "Login Error";
+        state.user = null;
+        state.isAuthenticated = false;
       });
   },
 });

@@ -37,9 +37,12 @@ const NavBarHeader = () => {
             <button className="lg:hidden btn px-4 py-3 border border-gray-500 rounded-lg">
               <AiOutlineSearch></AiOutlineSearch>
             </button>
-            <button className="px-3 py-2 border-2 border-blue-400 rounded-xl hover:bg-gradient-to-r from-blue-400 to-pink-400 transition-500 ease-in-out">
+            <Link
+              to={"/sign-in"}
+              className="px-3 py-2 border-2 border-blue-400 rounded-xl hover:bg-gradient-to-r from-blue-400 to-pink-400 transition-500 ease-in-out"
+            >
               Sign In
-            </button>
+            </Link>
           </div>
         </div>
       </div>
