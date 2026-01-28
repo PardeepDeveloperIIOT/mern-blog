@@ -4,6 +4,7 @@ import ButtonAccount from "../components/ButtonAccount";
 import { useDispatch, useSelector } from "react-redux";
 import { login, removeError, removeSuccess } from "../features/user/userSlice";
 import { toast } from "react-toastify";
+import OAuth from "../components/OAuth";
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -90,6 +91,7 @@ const SignIn = () => {
               </div>
               <div className="text-center">
                 <ButtonAccount title={"SignIn"}></ButtonAccount>
+                <OAuth></OAuth>
               </div>
             </form>
             <div className="flex gap-2  mt-5">

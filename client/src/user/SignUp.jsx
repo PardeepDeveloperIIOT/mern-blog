@@ -8,6 +8,7 @@ import {
   removeError,
   removeSuccess,
 } from "../features/user/userSlice";
+import OAuth from "../components/OAuth";
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -112,6 +113,7 @@ const SignUp = () => {
                 <ButtonAccount
                   title={loading ? "SignUp..." : "SignUp"}
                 ></ButtonAccount>
+                <OAuth></OAuth>
               </div>
             </form>
             <div className="flex gap-2  mt-5">
